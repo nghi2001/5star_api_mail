@@ -15,21 +15,25 @@ const smtp = nodemailer.createTransport({
     port: 587,
     secure: false,
     auth: {
-        user: 'nghindps16371@fpt.edu.vn',
-        pass: 'sxrdocvrhtqlhkks'
+        user: `${process.env.MAIL}`,
+        pass: `${process.env.MAIL_PASS}`
     }
 })
 
 function sendMail(content:any) {
-    
-    smtp.sendMail({
-        to: 'duynghikhum9@gmail.com',
-        from: 'nghindps16371@fpt.edu.vn',
-        subject: 'Testing Email Sends',
-        html: content,
-       })
+    content = JSON.parse(content.toString());
+
+    try{smtp.sendMail({
+        to: `${content.mail}`,
+        from: `${process.env.MAIL}`,
+        subject: `Confirm Mail`,
+        html: content.content,
+       })} catch (err) {
+        console.log(err);
+        
+       }
 }
-amqplib.connect(`amqp://${RABBIT_USER}:${RABBIT_PASS}@${RABBIT_HOST}:${RABBIT_PORT}`)
+amqplib.connect(`${process.env.RABBIT_URL}`)
 .then( async (conn: Connection) => {
 
         let chanel: Channel = await conn.createChannel();
