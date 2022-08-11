@@ -6,10 +6,10 @@ import {Connection, Channel, ConsumeMessage} from 'amqplib'
 dotenv.config()
 
 const queue = process.env.QUEUE || 'send_mail';
-const RABBIT_HOST = process.env.RABBIT_HOST || 'localhost';
-const RABBIT_PORT = process.env.RABBIT_PORT || '5672';
-const RABBIT_USER = process.env.RABBIT_USERNAME || 'guest';
-const RABBIT_PASS = process.env.RABBIT_PASSWORD || 'guest';
+const RABBIT_HOST = process.env.RABBIT_HOST ;
+const RABBIT_PORT = process.env.RABBIT_PORT 
+const RABBIT_USER = process.env.RABBIT_USERNAME ;
+const RABBIT_PASS = process.env.RABBIT_PASSWORD 
 const smtp = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 587,
